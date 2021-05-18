@@ -16,6 +16,6 @@ app.use('/user', userController)
 
 db.sync()
 
-app.listen(3000, () => {
-    console.log('App is listening on 3000')
-})//
+app.listen(4040, () => {
+    console.log('App is listening on 4040')
+})
