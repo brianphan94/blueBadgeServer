@@ -18,4 +18,4 @@ db.sync()
 
 app.listen(4040, () => {
     console.log('App is listening on 4040')
-})
+})//
