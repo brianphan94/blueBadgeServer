@@ -14,10 +14,12 @@ app.use('/test', (req,res) => {
 })
 
 app.use('/user', userController)
+
 app.use('/review', reviewController)
 
 db.sync()
 
 app.listen(4040, () => {
     console.log('App is listening on 4040')
-})//
+  
+})
