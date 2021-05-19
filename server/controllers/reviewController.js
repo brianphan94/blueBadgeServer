@@ -16,7 +16,7 @@ router.post('/post', validate, (req, res) => {
 
 router.get('/all', validate, (req, res) => {
     Review.findAll()
-    .then(review => res.status(200).json({review, token}))
+    .then(review => res.status(200).json({review}))
     .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
 })
 
