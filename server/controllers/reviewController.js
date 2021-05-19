@@ -5,6 +5,7 @@ const validate = require('../middleware/validateSession');
 router.get('/test', (req, res) => res.send('Review test'));
 
 router.post('/post', validate, (req, res) => {
+
     Review.create({
         email: req.body.email,
         reviewTitle: req.body.reviewTitle,
@@ -14,6 +15,7 @@ router.post('/post', validate, (req, res) => {
     .catch(err => res.status(500).json({message: 'Failed to post review.', error: err}))
 })
 
+<<<<<
 router.get('/all', validate, (req, res) => {
     Review.findAll()
     .then(review => res.status(200).json({review, token}))
@@ -33,3 +35,4 @@ router.get('/mine', validate, (req, res) => {
 })
 
 module.exports = router
+
