@@ -1,9 +1,9 @@
 const express = require('express')
 const app = express()
 const db = require('./db')
-const reviewController = require('./server/controllers/reviewController')
 
-const userController = require('../blueBadgeServer/server/controllers/userController')
+const userController = require('./server/controllers/userController')
+const reviewController = require('./server/controllers/reviewController')
 
 app.use(require('./server/middleware/headers'))
 app.use(express.json())
@@ -21,5 +21,5 @@ db.sync()
 
 app.listen(4040, () => {
     console.log('App is listening on 4040')
+  
 })
-
