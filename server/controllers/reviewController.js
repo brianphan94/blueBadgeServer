@@ -6,7 +6,7 @@ router.get('/test', (req, res) => res.send('Review test'));
 
 router.post('/post', validate, (req, res) => {
     Review.create({
-        email: req.body.email,
+        username: req.body.username,
         reviewTitle: req.body.reviewTitle,
         reviewBody: req.body.reviewBody
     })
@@ -27,7 +27,7 @@ router.put('/update/:id', validate, (req, res) => {
 })
 
 router.get('/mine', validate, (req, res) => {
-    Review.findAll(req.body, {where: {email: req.body.email}})
+    Review.findAll(req.body, {where: {username: req.body.username}})
     .then(review => res.status(200).json({review}))
     .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
 })
