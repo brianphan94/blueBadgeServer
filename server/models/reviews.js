@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 const db = require('../../db');
 
 const Review = db.define('review', {
-    email: {
+    username: {
         type: sequelize.STRING,
         allowNull: false
     },
