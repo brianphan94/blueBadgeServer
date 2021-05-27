@@ -32,5 +32,14 @@ router.get('/mine', validate, (req, res) => {
     .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
 })
 
+router.get('/search', (req, res) => {
+    console.log(req.query)
+    Review.findAll({where: {username: req.query.query}})
+    .then(reviews => {
+        // const filterUser = users.filter(user => user.username.includes(req.query.query))
+        res.status(200).json({reviews})})
+    .catch(err => res.status(500).json({message: 'No users found', error: err}))
+})
+
 module.exports = router
 
