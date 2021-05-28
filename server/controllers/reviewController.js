@@ -33,11 +33,19 @@ router.get('/mine', validate, (req, res) => {
 })
 
 router.get('/search', (req, res) => {
-    console.log(req.query)
     Review.findAll({where: {username: req.query.query}})
     .then(reviews => {
-        // const filterUser = users.filter(user => user.username.includes(req.query.query))
-        res.status(200).json({reviews})})
+        let userList = {}
+        reviews.forEach(review => {
+            if (userList[review.dataValues.username]) {
+                userList[review.username].push(review) 
+            }
+            else {
+                userList[review.username] = [review]
+            }   
+        })
+        
+        res.status(200).json({userList})})
     .catch(err => res.status(500).json({message: 'No users found', error: err}))
 })
 
