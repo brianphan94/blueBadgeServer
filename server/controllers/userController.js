@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
         let token = jwt.sign({id: user.id}, "I_AM_SECRET",{expiresIn: '1d'})
         res.status(200).send({user:user, token: token})
     })
-    .catch((error => res.status(500).send({error: error})))
+    .catch((error => res.status(500).send({error: error.errors[0].message})))
 })
 
 //USER LOGIN

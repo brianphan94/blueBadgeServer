@@ -12,6 +12,11 @@ const Review = db.define('review', {
         allowNull: false
     },
 
+    subReviewTitle: {
+        type: sequelize.STRING, 
+        allowNull: false
+    },
+
     reviewBody: {
         type: sequelize.TEXT,
         allowNull: false
