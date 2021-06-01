@@ -1,8 +1,19 @@
 const router = require('express').Router();
 const Review = require('../models/reviews');
 const validate = require('../middleware/validateSession');
+const { response } = require('express');
 
 router.get('/test', (req, res) => res.send('Review test'));
+
+// router.post('/post', validate, (req, res) => {
+//     Review.create({
+//         username: req.body.username,
+//         reviewTitle: req.body.reviewTitle,
+//         reviewBody: req.body.reviewBody
+//     })
+//     .then(review => res.status(200).json({review}))
+//     .catch(err => res.status(500).json({message: 'Failed to post review.', error: err}))
+// })
 
 router.post('/post', validate, (req, res) => {
     Review.create({
@@ -11,8 +22,15 @@ router.post('/post', validate, (req, res) => {
         reviewBody: req.body.reviewBody
     })
     .then(review => res.status(200).json({review}))
+    .then(function (review) {
+        let responseObject = {
+            review: review, 
+        }
+        res.status(200).json({responseObject})
+    })
     .catch(err => res.status(500).json({message: 'Failed to post review.', error: err}))
 })
+
 
 router.get('/all', validate, (req, res) => {
     Review.findAll()
@@ -33,4 +51,3 @@ router.get('/mine', validate, (req, res) => {
 })
 
 module.exports = router
-
