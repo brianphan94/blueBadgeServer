@@ -33,5 +33,11 @@ router.get('/mine', validate, (req, res) => {
     .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
 })
 
+router.delete('/delete/:id', validate, (req,res) => {
+    Review.destroy({where: {id: req.params.id} })
+    .then(destroyed => res.status(200).json({message: 'Review deleted', destroyed}))
+    .catch(err => res.status(500).json({error: err}))
+})
+
 module.exports = router
 
