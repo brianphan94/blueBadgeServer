@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
-const db = new Sequelize('blue-badge-server', 'postgres', 'password', {
+const db = new Sequelize(process.env.DATABASE, 'postgres', process.env.PASS, {
     host: 'localhost',
     dialect: 'postgres'
 })
+
 
 db.authenticate().then(
     () => {

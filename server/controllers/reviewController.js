@@ -7,8 +7,8 @@ router.get('/test', (req, res) => res.send('Review test'));
 router.post('/post', validate, (req, res) => {
     Review.create({
         username: req.body.username,
-        reviewTitle: req.body.reviewTitle, //game
-        subReviewTitle: req.body.subReviewTitle, //user title
+        reviewTitle: req.body.reviewTitle,
+        subReviewTitle: req.body.subReviewTitle,
         reviewBody: req.body.reviewBody
     })
     .then(review => res.status(200).json({review}))
