@@ -7,8 +7,8 @@ router.get('/test', (req, res) => res.send('Review test'));
 router.post('/post', validate, (req, res) => {
     Review.create({
         username: req.body.username,
-        reviewTitle: req.body.reviewTitle, //game
-        subReviewTitle: req.body.subReviewTitle, //user title
+        reviewTitle: req.body.reviewTitle,
+        subReviewTitle: req.body.subReviewTitle,
         reviewBody: req.body.reviewBody
     })
     .then(review => res.status(200).json({review}))
@@ -32,6 +32,12 @@ router.get('/mine', validate, (req, res) => {
     .then(review => res.status(200).json({review}))
     .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
 })
+
+
+router.delete('/delete/:id', validate, (req,res) => {
+    Review.destroy({where: {id: req.params.id} })
+    .then(destroyed => res.status(200).json({message: 'Review deleted', destroyed}))
+    .catch(err => res.status(500).json({error: err}))
 
 router.get('/search', (req, res) => {
     Review.findAll({where: {username: req.query.query}})

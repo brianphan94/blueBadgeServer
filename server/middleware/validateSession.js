@@ -10,7 +10,7 @@ const validate = (req, res, next) => {
             massage: 'No validation token'
         })
     } else {
-        jwt.verify(token, "I_AM_SECRET", (err, decodedToken)=> {
+        jwt.verify(token, process.env.SECRET, (err, decodedToken)=> {
             if(!err && decodedToken){
                 User.findOne({
                     where: {
