@@ -33,10 +33,27 @@ router.get('/mine', validate, (req, res) => {
     .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
 })
 
+
 router.delete('/delete/:id', validate, (req,res) => {
     Review.destroy({where: {id: req.params.id} })
     .then(destroyed => res.status(200).json({message: 'Review deleted', destroyed}))
     .catch(err => res.status(500).json({error: err}))
+
+router.get('/search', (req, res) => {
+    Review.findAll({where: {username: req.query.query}})
+    .then(reviews => {
+        let userList = {}
+        reviews.forEach(review => {
+            if (userList[review.dataValues.username]) {
+                userList[review.username].push(review) 
+            }
+            else {
+                userList[review.username] = [review]
+            }   
+        })
+        
+        res.status(200).json({userList})})
+    .catch(err => res.status(500).json({message: 'No users found', error: err}))
 })
 
 module.exports = router
