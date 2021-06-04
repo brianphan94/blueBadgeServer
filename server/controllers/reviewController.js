@@ -5,16 +5,6 @@ const { response } = require('express');
 
 router.get('/test', (req, res) => res.send('Review test'));
 
-// router.post('/post', validate, (req, res) => {
-//     Review.create({
-//         username: req.body.username,
-//         reviewTitle: req.body.reviewTitle,
-//         reviewBody: req.body.reviewBody
-//     })
-//     .then(review => res.status(200).json({review}))
-//     .catch(err => res.status(500).json({message: 'Failed to post review.', error: err}))
-// })
-
 router.post('/post', validate, (req, res) => {
     Review.create({
         username: req.body.username,
@@ -47,6 +37,13 @@ router.put('/update/:id', validate, (req, res) => {
 
 router.get('/mine', validate, (req, res) => {
     Review.findAll(req.body, {where: {username: req.body.username}})
+    .then(review => res.status(200).json({review}))
+    .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
+})
+
+// this end point is for jason's edit review page.  
+router.get('/edit/:username', validate, (req, res) => {
+    Review.findAll(req.body, {where: {username: req.params.username}})
     .then(review => res.status(200).json({review}))
     .catch(err => res.status(500).json({message: 'Failed to get reviews.', error: err}))
 })
