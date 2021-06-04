@@ -38,6 +38,8 @@ router.delete('/delete/:id', validate, (req,res) => {
     Review.destroy({where: {id: req.params.id} })
     .then(destroyed => res.status(200).json({message: 'Review deleted', destroyed}))
     .catch(err => res.status(500).json({error: err}))
+})
+
 
 router.get('/search', (req, res) => {
     Review.findAll({where: {username: req.query.query}})
@@ -57,4 +59,3 @@ router.get('/search', (req, res) => {
 })
 
 module.exports = router
-
