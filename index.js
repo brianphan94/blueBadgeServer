@@ -1,3 +1,5 @@
+
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const db = require('./db')
@@ -19,7 +21,7 @@ app.use('/review', reviewController)
 
 db.sync()
 
-app.listen(4040, () => {
+app.listen(process.env.PORT, () => {
     console.log('App is listening on 4040')
   
 })

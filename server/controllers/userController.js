@@ -3,11 +3,6 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
-router.get('/testing', (req, res) => {
-    res.send('testing testing')
-})
-
-//USER CREATE
 router.post('/register', (req, res) => {
     User.create({
         email: req.body.user.email,
@@ -15,13 +10,12 @@ router.post('/register', (req, res) => {
         password: bcrypt.hashSync(req.body.user.password, 10)
     })
     .then(user => {
-        let token = jwt.sign({id: user.id}, "I_AM_SECRET",{expiresIn: '1d'})
+        let token = jwt.sign({id: user.id}, process.env.SECRET,{expiresIn: '1d'})
         res.status(200).send({user:user, token: token})
     })
     .catch((error => res.status(500).send({error: error.errors[0].message})))
 })
 
-//USER LOGIN
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
@@ -35,13 +29,19 @@ router.post('/login', (req, res) => {
             })
 
             function generateToken(user) {
-                let token = jwt.sign({id: user.id}, "I_AM_SECRET", {expiresIn: '1d'})
+                let token = jwt.sign({id: user.id}, process.env.SECRET, {expiresIn: '1d'})
                 res.send({user, token})
             }
         }else{
             res.send('No user detected')
         }
     }).catch(err => res.status(500).json({error: err}))
+})
+
+router.get('/all', (req, res) => {
+    User.findAll()
+    .then(user => res.status(200).json({user}))
+    .catch(err => res.status(500).json({message: 'No users found', error: err}))
 })
 
 module.exports = router
