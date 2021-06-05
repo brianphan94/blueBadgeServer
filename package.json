@@ -1,0 +1,31 @@
+{
+  "name": "bluebadgeserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianphan94/blueBadgeServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brianphan94/blueBadgeServer/issues"
+  },
+  "homepage": "https://github.com/brianphan94/blueBadgeServer#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "postgres": "^1.0.2",
+    "sequelize": "^6.6.2"
+  }
+}
