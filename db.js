@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
-const db = new Sequelize(process.env.DATABASE, 'postgres', process.env.PASS, {
-    host: 'localhost',
-    dialect: 'postgres'
+const db = new Sequelize(
+    `postgresql://postgres:${encodeURIComponent(process.env.PASS)}@localhost/blue-badge-server,`, 
+    {
+    dialect: 'postgres',
 })
 
 

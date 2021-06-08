@@ -2,15 +2,20 @@ const router = require('express').Router();
 const Review = require('../models/reviews');
 const validate = require('../middleware/validateSession');
 const { response } = require('express');
-
 router.post('/post', validate, (req, res) => {
     Review.create({
         username: req.body.username,
-        reviewTitle: req.body.reviewTitle,
-        subReviewTitle: req.body.subReviewTitle,
+        reviewTitle: req.body.reviewTitle, //game
+        subReviewTitle: req.body.subReviewTitle, //user title
         reviewBody: req.body.reviewBody
     })
     .then(review => res.status(200).json({review}))
+    .then(function (review) {
+        let responseObject = {
+            review: review, 
+        }
+        res.status(200).json({responseObject})
+    })
     .catch(err => res.status(500).json({message: 'Failed to post review.', error: err}))
 })
 
