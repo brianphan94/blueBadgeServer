@@ -1,8 +1,12 @@
 const Sequelize = require('sequelize')
-const db = new Sequelize(
-    `postgresql://postgres:${encodeURIComponent(process.env.PASS)}@localhost/blue-badge-server,`, 
-    {
+const db = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
+    // dialectOptions:{
+    //     ssl:{
+    //         require: true, 
+    //         rejectUnauthorized: false
+    //     }
+    // }
 })
 
 

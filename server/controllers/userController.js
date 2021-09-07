@@ -38,10 +38,4 @@ router.post('/login', (req, res) => {
     }).catch(err => res.status(500).json({error: err}))
 })
 
-router.get('/all', (req, res) => {
-    User.findAll()
-    .then(user => res.status(200).json({user}))
-    .catch(err => res.status(500).json({message: 'No users found', error: err}))
-})
-
 module.exports = router
